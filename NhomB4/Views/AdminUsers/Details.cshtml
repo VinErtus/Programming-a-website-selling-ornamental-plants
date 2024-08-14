@@ -1,0 +1,43 @@
+﻿@model NhomB4.Models.AdminUser
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>AdminUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên người dùng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameUser)
+        </dd>
+
+        <dt>
+            Quyền người dùng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleUser)
+        </dd>
+
+        <dt>
+           Mật khẩu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

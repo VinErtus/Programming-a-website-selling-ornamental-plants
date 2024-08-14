@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<NhomB4.Models.Product>
+@{
+    ViewBag.Title = "LichSuDatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center">Lịch Sử Đặt Hàng</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Tên Sản Phẩm
+            </th>
+            <th>
+                Hình
+            </th>
+            
+             <th>
+                    Ngày đặt
+                </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NamePro)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.ImagePro)" height="200" width="200" />
+        </td>
+        
+        <td>
+            17/11/2023
+        </td>
+
+    </tr>
+        }
+
+    </table>
+</div>
+

@@ -1,0 +1,40 @@
+﻿body {
+    width: 1200px;
+    margin: 10px auto;
+    background: #e9ebee;
+}
+
+.tftable {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    color: #333333;
+    width: 100%;
+    border-width: 1px;
+    border-color: #729ea5;
+    border-collapse: collapse;
+}
+
+    .tftable th {
+        font-size: 12px;
+        background-color: #acc8cc;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #729ea5;
+        text-align: left;
+    }
+
+    .tftable tr {
+        background-color: #d4e3e5;
+    }
+
+    .tftable td {
+        font-size: 12px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #729ea5;
+    }
+
+    .tftable tr:hover {
+        background-color: #ffffff;
+    }

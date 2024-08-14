@@ -1,0 +1,43 @@
+﻿@model NhomB4.Models.Customer
+
+@{
+    ViewBag.Title = "LoginCus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+<div align="center">
+    &nbsp;&nbsp; <h2>ĐĂNG NHẬP KHÁCH HÀNG</h2>
+    <hr />
+    @ViewBag.ErrorInfo
+    @using (Html.BeginForm("LoginAcountCus", "Customers"))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <td style="padding: 5px">@Html.LabelFor(model => model.UserName) </td>
+                <td>
+                    @Html.TextBoxFor(model => model.UserName, new
+                    {
+                        style = "filed-validation-error"
+           })
+                </td>
+                <td>@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" }) </td>
+            </tr>
+            <tr>
+                <td style="padding: 5px">@Html.LabelFor(model => model.Password) </td>
+                <td>@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password" } })</td>
+                <td>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" }) </td>
+                @if (ViewBag.ErrorInfo == null)
+                {
+                    <p>@ViewBag.ErrorInfo</p>
+                }
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Login" class="btn btn-primary" /></td>
+            </tr>
+        </table>
+    }
+</div>

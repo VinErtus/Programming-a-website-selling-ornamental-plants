@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NhomB4.Models.AdminUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center">Danh Sách Tài Khoản </h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered" style="background-color: aquamarine; border: 1px solid black;">
+    <tr>
+        <th>
+           Tên người dùng
+        </th>
+        <th>
+           Quyền người dùng
+        </th>
+        <th>
+            Mật khẩu
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PasswordUser)
+        </td>
+        <td>
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,123 @@
+﻿@model NhomB4.Models.Cart
+
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+
+<style>
+    .button2 {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        border: 1px solid black;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 8px;
+    }
+</style>
+<h2>Giỏ Hàng</h2>
+<a href="@Url.Action( "ProductList", "Products" ) "> Tiếp tục Mua hàng</a>
+@if (Model != null)
+{
+    <table class="table-bordered">
+        <thead style="text-align: center; font-size: large; ">
+            <tr>
+                <th>Tên Sản phẩm</th>
+                <th>Hình</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item._quantity * (decimal)item._product.Price.Value;
+                <tr>
+                    <td width="400">@Html.DisplayFor(model => item._product.NamePro) </td>
+                    <td><img src="@item._product.ImagePro" width="100" height="110" /></td>
+                    <td width="100" align="right"> @Html.DisplayFor(model => item._product.Price) </td>
+                    <td align="right">
+                        @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@item._product.ProductID" name="idPro" />
+                       
+                            <input type="number" value="@item._quantity" name="carQuantity" style="text-align: right" min="1" />
+                       
+                            <input type="submit" value="Cập nhật" />
+                        }
+                    </td>
+                    <td width="100" align="right">@total.ToString("#,##0").Replace(',', '.') </td>
+                    <td>
+                        <a href="/ShoppingCart/RemoveCart/@item._product.ProductID" class="btn-danger">- Xóa -</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" align="center">
+                    <br />
+                    (Hãy đăng ký KH nếu chưa đăng ký)
+                    <a href="@Url.Action( "Create", "Customers" ) " class="btn btn-success">Đăng ký</a>
+                </td>
+                <td colspan="3" style="text-align: right; font-size: x-large; color: crimson; ">
+                    Tổng tiền : @Model.Total_money().ToString("#,##0").Replace(',', '.') Nghìn đồng
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <br />
+                    <h4>-------------------THÔNG TIN ĐƠN HÀNG</h4>
+                    @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+                    {
+                        <table style="border-collapse: separate; border-spacing: 5px; ">
+                            <tr>
+                                <td></td>
+                                <td><input type="hidden" name="CodeCustomer" value="@Session[ "IDCus" ] " required /></td>
+                            </tr>
+                            <tr>
+                                <td> Khách hàng : </td>
+                                <td><input type="text" name="NameCustomer" value="@Session[ "NameCus" ] " required /></td>
+                            </tr>
+                            <tr>
+                                <td> Điên thoại : </td>
+                                <td><input type="text" name="PhoneCustomer" value="@Session[ "PhoneCus" ] " required /></td>
+                            </tr>
+                            <tr>
+                                <td> Địa chỉ giao hàng : </td>
+                                <td> <input type="text" name="AddressDeliverry" required /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                   @* <div class="col-6">
+                                        <button  class="button2" onclick="window.location.href='/ShoppingCart/PaymentWithPayPal/'">
+                                            <img src="~/Images/img2.png" height="35" width="35" /> Thanh toán qua PayPal
+                                        </button>
+                                    </div>*@
+                                    <a href="@Url.Action( "LoginCus", "Customers" ) " class="btn btn-primary">Đăng nhập</a>
+                                    (Hãy đăng nhập trước)
+                                    <input type="submit" value="Thanh toán qua PayPal" class="button2"    />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+                <td colspan="3">
+                   
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h4>Giỏ hàng rỗng ! Xin mời tiếp tục mua hàng</h4>
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NhomB4.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link rel="stylesheet" href="~/Content/lichsudathang.css">
+}
+
+<h2>Danh mục sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm sản phẩm mới", "Create")
+</p>
+@using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+{
+    <input type="text" name="_name" />
+    <input type="submit" value="Search" />
+
+    <table class="tftable">
+        <tr>
+            <th>
+                Mã
+            </th>
+            <th>
+                Mã danh mục
+            </th>
+            <th>
+                Tên danh mục
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDCate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCate)
+                </td>
+                <td>
+                    @Html.ActionLink("Cập nhật", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

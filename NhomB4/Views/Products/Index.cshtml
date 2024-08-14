@@ -1,0 +1,65 @@
+﻿@model NhomB4.Controllers.TemplateMethod.ConcreteProductView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+}
+@{ 
+    var dbContext = new NhomB4.Models.DBCayCanhNhomB04Entities(); // Khởi tạo đối tượng DbContext của ứng dụng
+    var Products = dbContext.Products.ToList();
+}
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="container">
+    <div class="row" style="background-color: #27ae60;color:white;">
+        <h2 style="text-align:center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">DANH SÁCH SẢN PHẨM</h2>
+    </div>
+    <div style=" height: 70px; text-align: center; padding: 15px; ">
+        <! -- Đoạn thêm -->
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+        {
+            <table align="center">
+                <tr>
+                    <td>
+                        Tên Sản phẩm : <input type="text" name="SearchString" style="height:40px; width:1000px;" />
+                        <input type="submit" value="Tìm kiếm" class="btn btn-warning" height="500" />
+                    </td>
+                    &nbsp;   &nbsp;   &nbsp;
+                    <td>
+                        Đơn giá từ : <input type="number" name="min" />
+                        Đến : <input type="number" name="max" />
+                        <input type="submit" value="Tìm giá" class="btn btn-info" />
+                    </td>
+                </tr>
+            </table>
+        }
+
+        @* <! --Kết thúc -->*@
+    </div>
+    <div class="row">
+        <br />
+        <br />
+        @foreach (var pro in Products)
+        {
+            <div class="col-xm-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card-pro" style="text-align: center; background-color: #ecf0f1;">
+                    <p>@Html.DisplayFor(model => pro.ProductID)</p>
+                    <a class="btn btn-muted" href="/Products/Details/@pro.ProductID"><img src="@Url.Content(pro.ImagePro)" width="200" height="250" /></a>
+                    <p>@Html.DisplayFor(model => pro.NamePro)</p>
+                    <p>@Html.DisplayFor(model => pro.Price) nghìn</p>
+                    <a href="/ShoppingCart/AddToCart/@pro.ProductID" class="btn btn-success" style="width: 200px;"> Mua </a>
+                    <hr />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

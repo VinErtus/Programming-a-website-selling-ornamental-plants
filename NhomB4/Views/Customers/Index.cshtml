@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NhomB4.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link rel="stylesheet" href="~/Content/lichsudathang.css">
+}
+
+<h2>Danh sách khách hàng</h2>
+
+<p>
+    @Html.ActionLink("Thêm", "Create")
+</p>
+@using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+{
+    <input type="text" name="_name" />
+    <input type="submit" value="Search" />
+    <table class="tftable">
+        <tr>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Email khách hàng
+            </th>
+           @* <th>
+                Username
+            </th>
+            <th>
+                Password
+            </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCus)
+                </td>
+              @*  <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.IDCus }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDCus }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDCus })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/menu.css" type="text/css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/32d24977ce.js"
+            crossorigin="anonymous"></script>
+    <br />
+    <br />
+    <br />
+    <style>
+        li.format-hello {
+            padding-top: 15px;
+            color: white;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="navbar  navbar-fixed-top" style="background-color: #636e72; ">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <nav>
+                    <ul>
+                        <li><a href="~/Products/Index_2">Trang chủ</a></li>
+                        @*<li><a href="~/LoginUsers/RegisterUser">Phân Quyền</a></li>*@
+                        <li>
+                            <a href="#">Quản lý</a>
+                            <ul>
+                                <li><a href="~/Products/Index_2">Sản phẩm</a></li>
+                                <li><a href="~/Categories/Index">Loại Sản phẩm</a></li>
+                                <li><a href="~/Customers/Index">Khách hàng</a></li>
+                                <li><a href="~/OrderProes/Index">Đơn hàng</a></li>
+                             @*   <li><a href="~/Customers/Create/">Phân quyền</a></li>*@
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="format-hello">
+                        @if (Session["NameUser"] == null)
+                        {
+                            <span style="color:white"></span>
+                        }
+
+                        else
+                        {
+                    <span><i class="fa-sharp fa-solid fa-user-tie"></i>&nbsp;<text>Xin chào admin: </text>&nbsp; @Session["NameUser"]&nbsp;&nbsp;&nbsp;<a class="lienket" href="@Url.Action("LogOutUser","LoginUsers")">Đăng Xuất</a></span>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-2" >
+               @* @{ Html.RenderAction("CategoryPartial", "Categories"); }*@
+            </div>
+            <div class="col-md-10" id="div-content">
+                @RenderBody()
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+@*    <div id="div-footer" style="background-color: #636e72;">
+        <div class="row" style="background-color: #636e72;">
+            <div class="col-md-1" style="background-color: #636e72;"></div>
+            <div class="col-md-3" style="background-color: #636e72;">
+                <p style="color: white; background-color: #636e72;">
+                    <br />
+                    <b>CÔNG TY CÂY CẢNH TẦM NHÌN CHÂU Á</b>
+                </p>
+                <p style="color: #dfe6e9; background-color: #636e72;">
+                    Văn phòng: Tầng 9 toà nhà Handico, ngã tư Phạm Hùng - Mễ Trì, Nam Từ
+                    Liêm, Hà Nội
+                </p>
+                <p style="color: #dfe6e9; background-color: #636e72;">
+                    Vườn ươm : Km12 Quốc lộ 32, Xã Phú Diễn, Huyện Từ Liêm, Hà Nội
+                </p>
+            </div>
+            <div class="col-md-3" style="background-color: #636e72;"></div>
+            <div class="col-md-4" style="background-color: #636e72;">
+                <p style="color: white; background-color: #636e72;;">
+                    <br />
+                    <b>Thông Tin Liên Hệ</b>
+                </p>
+                <p style="color: #dfe6e9; background-color: #636e72;">
+                    Sales : 024 2260 2028 / 29 - Hotline: 090 622 5503
+                </p>
+                <p style="color: #dfe6e9; background-color: #636e72;">Email: nhom4.vn - Web: nhom4.vn</p>
+            </div>
+        </div>
+    </div>*@
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model NhomB4.Models.AdminUser
+
+@{
+    ViewBag.Title = "RegisterUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<div align="center">
+    <h2>PHÂN QUYỀN</h2>
+    @using (Html.BeginForm("RegisterUser", "LoginUsers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <p>@Html.LabelFor(model => model.ID) </p>
+        <p>@Html.EditorFor(model => model.ID) </p>
+        <p>@Html.ValidationMessageFor(model => model.ID) </p>
+        if (ViewBag.ErrorRegister != null)
+        {
+            <p>@ViewBag.ErrorRegister</p>
+        }
+        <p>@Html.LabelFor(model => model.NameUser) </p>
+        <p>@Html.EditorFor(model => model.NameUser) </p>
+        <p>@Html.ValidationMessageFor(model => model.NameUser) </p>
+        <p>@Html.LabelFor(model => model.RoleUser) </p>
+        <p>@Html.EditorFor(model => model.RoleUser) </p>
+        <p>@Html.ValidationMessageFor(model => model.RoleUser) </p>
+        <p>@Html.LabelFor(model => Model.PasswordUser) </p>
+        <p>@Html.PasswordFor(model => model.PasswordUser) </p>
+        <p>@Html.ValidationMessageFor(model => model.PasswordUser) </p>
+        <p>@Html.LabelFor(model => Model.PasswordUser) </p>
+        <p>@Html.PasswordFor(model => model.PasswordUser) </p>
+        <p>@Html.ValidationMessageFor(model => model.PasswordUser) </p>
+        <input type="submit" value="Ghi" class="btn btn-primary" />
+    }
+</div>

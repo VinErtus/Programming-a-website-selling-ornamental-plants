@@ -1,0 +1,43 @@
+﻿@model NhomB4.Models.OrderPro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>OrderPro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ngày nhận
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOrder)
+        </dd>
+
+        <dt>
+           Địa chỉ giao hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressDeliverry)
+        </dd>
+
+        <dt>
+           Tên khách hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.NameCus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở về", "Index")
+</p>

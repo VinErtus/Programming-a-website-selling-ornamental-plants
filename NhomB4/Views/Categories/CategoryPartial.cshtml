@@ -1,0 +1,41 @@
+﻿@model IEnumerable<NhomB4.Models.Category>
+<style>
+    #div-u {
+        padding-top: 30px;
+        margin-top: 20px;
+        background-color: #27ae60;
+        text-decoration: none;
+    }
+
+    .div-cate {
+        height: 30px;
+        width: 100%;
+    }
+
+        .div-cate a {
+            color: white;
+            text-decoration: none;
+            font-size: large;
+        }
+
+            .div-cate a:hover {
+                color: black;
+                text-decoration: none;
+            }
+</style>
+<br />
+@*<h3 style="color:black; text-align:center;">&nbsp;&nbsp; 🔥HOT🔥 </h3>*@
+<div style="text-align:center; position:relative; right:10%;" >
+    <img src="~/Content/images/logo.png"  />
+</div>
+<div style="list-style-type: none; text-align:center; " id="div-u" >
+    @{
+        foreach (var item in Model)
+        {
+            <div class="div-cate">
+                @Html.ActionLink(item.NameCate, "ProductList", "Products", new {category = item.IDCate}, "")
+            </div>
+            <hr />
+        }
+    }
+</div>

@@ -1,0 +1,146 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/32d24977ce.js"
+            crossorigin="anonymous"></script>
+    <style>
+        #div-footer {
+            text-align: center;
+            padding-top: 15px;
+            height: 50px;
+            width: 100%;
+            background-color: #27ae60;
+        }
+
+        li a {
+            color: white;
+        }
+
+        li.format-hello {
+            padding-top: 15px;
+            color: white;
+        }
+    </style>
+    @{
+        var idCus = Session["IDCus"] as int?;
+    }
+    <br />
+</head>
+<body>
+    <div class="navbar navbar-fixed-top" style="background-color: #27ae60;">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Trang chủ", "ProductList", "Products")</li>
+                    <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li>@Html.ActionLink("Sản phẩm", "Index", "Products")</li>
+                    @*                 <li>@Html.ActionLink("Loại SP", "Index", "Categories")</li>
+                        <li>@Html.ActionLink("Khách hàng", "Index", "Customers")</li>
+                        <li>@Html.ActionLink("Đơn hàng", "Index", "OrderProes")</li>*@
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quản lý <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            <li>@Html.ActionLink("Đăng nhập(Admin)", "LoginAccount", "LoginUsers")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="lienket" style="" href="~/ShoppingCart/ShowCart"><i class="fa-solid fa-cart-shopping"></i></a>
+                        @Html.Action("BagCart", "ShoppingCart")
+
+                    </li>
+                    @if (Session["NameCus"] == null)
+                    {
+
+
+                        <li><a href="/Customers/Create"><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
+                        <li><a href="/Customers/LoginCus"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                        @*  <li><a class="lienket" href="@Url.Action("LogOutUser","LoginUsers")">Đăng Xuất</a></li>*@
+                    }
+
+                    else
+                    {
+                <li>  @Html.ActionLink("Lịch Sử Giao Dịch", "LichSuDatHang", "OrderProes", new { idCus = idCus }, "")</li>
+                      
+                        @*  <li><a href="/OrderProes/LichSuDatHang/8">Lịch Sử Giao Dịch</a></li>*@
+                        @*                    <li><a href="/OrderProes/LichSuDatHang/@Session["IDCus"]">Lịch Sử Giao Dịch</a></li>*@
+                        @*   <a href="/OrderProes/LichSuDatHang/'@{idCus}'" class="btn btn-success" style="align-items:center; width:200px;"> Mua </a>*@
+
+                        @*  <li><a class="lienket" href="@Url.Action("LogOutUser","LoginUsers")">Đăng Xuất</a></li>*@
+                    }
+                    @*  @Html.ActionLink("Lịch Sử Giao Dịch", "LichSuDatHang", "OrderProes", new { idcus = idCus });*@
+
+                    <li class="format-hello">
+                        @if (Session["NameCus"] == null)
+                        {
+                            <span style="color:white"></span>
+                        }
+
+                        else
+                        {
+                            <span><text>Xin Chào: </text> @Session["NameCus"] &nbsp;<a class="lienket" href="@Url.Action("LogOutUser","LoginUsers")">Đăng Xuất</a></span>
+
+                        }
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-md-2" style="background-color: #ecf0f1; min-height: 600px; ">
+                @{ Html.RenderAction("CategoryPartial", "Categories");}
+
+            </div>
+            <div class="col-md-10" id="div-content">
+                @RenderBody()
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
+    <div id="div-footer" style="background-color: #27ae60;">
+        <div class="row" style="background-color: #27ae60;">
+            <div class="col-md-1" style="background-color: #27ae60;"></div>
+            <div class="col-md-3" style="background-color: #27ae60;">
+                <p style="color: white ;background-color: #27ae60;">
+                    <br />
+                    <b>CÔNG TY CÂY CẢNH TẦM NHÌN CHÂU Á</b>
+                </p>
+                <p style="color: #dfe6e9 ;background-color: #27ae60;">
+                    Văn phòng: Tầng 9 toà nhà Handico, ngã tư Phạm Hùng - Mễ Trì, Nam Từ
+                    Liêm, Hà Nội
+                </p>
+                <p style="color: #dfe6e9;background-color: #27ae60;">
+                    Vườn ươm : Km12 Quốc lộ 32, Xã Phú Diễn, Huyện Từ Liêm, Hà Nội
+                </p>
+            </div>
+            <div class="col-md-3" style="background-color: #27ae60;"></div>
+            <div class="col-md-4" style="background-color: #27ae60;">
+                <p style="color: white; background-color: #27ae60;">
+                    <br />
+                    <b>Thông Tin Liên Hệ</b>
+                </p>
+                <p style="color: #dfe6e9; background-color: #27ae60;">
+                    Sales : 024 2260 2028 / 29 - Hotline: 090 622 5503
+                </p>
+                <p style="color: #dfe6e9; background-color: #27ae60;">Email: nhom4.vn - Web: nhom4.vn</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

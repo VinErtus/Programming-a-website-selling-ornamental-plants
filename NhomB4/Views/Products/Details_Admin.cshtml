@@ -1,0 +1,59 @@
+﻿@model NhomB4.Models.Product
+
+@{
+    ViewBag.Title = "Details_Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details_Admin</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Tên sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamePro)
+        </dd>
+
+        <dt>
+            Mô tả sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecriptionPro)
+        </dd>
+
+        <dt>
+           Danh mục
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+           Gía
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+           Hình
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.ImagePro)"/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Trở về", "Index_2")
+</p>
